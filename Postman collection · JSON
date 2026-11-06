@@ -1,0 +1,169 @@
+{
+  "info": {
+    "name": "Assignment 7 - Books MongoDB API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:3000" }
+  ],
+  "item": [
+    {
+      "name": "Create Books Collection",
+      "request": {
+        "method": "POST",
+        "url": "{{baseUrl}}/collection/books"
+      }
+    },
+    {
+      "name": "Create Authors Collection",
+      "request": {
+        "method": "POST",
+        "url": "{{baseUrl}}/collection/authors",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Author1\",\n  \"nationality\": \"British\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Create Capped Logs Collection",
+      "request": {
+        "method": "POST",
+        "url": "{{baseUrl}}/collection/logs/capped"
+      }
+    },
+    {
+      "name": "Create Books Title Index",
+      "request": {
+        "method": "POST",
+        "url": "{{baseUrl}}/collection/books/index"
+      }
+    },
+    {
+      "name": "Insert One Book",
+      "request": {
+        "method": "POST",
+        "url": "{{baseUrl}}/books",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"Book1\",\n  \"author\": \"Ali\",\n  \"year\": 1937,\n  \"genres\": [\"Fantasy\", \"Adventure\"]\n}"
+        }
+      }
+    },
+    {
+      "name": "Insert Multiple Books",
+      "request": {
+        "method": "POST",
+        "url": "{{baseUrl}}/books/batch",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "[\n  { \"title\": \"Future\", \"author\": \"George Orwell\", \"year\": 2020, \"genres\": [\"Science Fiction\"] },\n  { \"title\": \"To Kill a Mockingbird\", \"author\": \"Harper Lee\", \"year\": 1960, \"genres\": [\"Classic\", \"Fiction\"] },\n  { \"title\": \"Brave New World\", \"author\": \"Aldous Huxley\", \"year\": 2006, \"genres\": [\"Dystopian\", \"Science Fiction\"] }\n]"
+        }
+      }
+    },
+    {
+      "name": "Insert Log",
+      "request": {
+        "method": "POST",
+        "url": "{{baseUrl}}/logs",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"book_id\": \"64b5c2d8a123456ef8914\",\n  \"action\": \"borrowed\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Update Book Year By Title",
+      "request": {
+        "method": "PATCH",
+        "url": "{{baseUrl}}/books/Future",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"year\": 2022\n}"
+        }
+      }
+    },
+    {
+      "name": "Find Book By Title",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/books/title?title=Brave New World"
+      }
+    },
+    {
+      "name": "Find Books By Year Range",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/books/year?from=1990&to=2010"
+      }
+    },
+    {
+      "name": "Find Books By Genre",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/books/genre?genre=Science Fiction"
+      }
+    },
+    {
+      "name": "Skip Limit Books Sorted",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/books/skip-limit"
+      }
+    },
+    {
+      "name": "Find Books Year As Integer",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/books/year-integer"
+      }
+    },
+    {
+      "name": "Find Books Excluding Genres",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/books/exclude-genres"
+      }
+    },
+    {
+      "name": "Delete Books Before Year",
+      "request": {
+        "method": "DELETE",
+        "url": "{{baseUrl}}/books/before-year?year=2000"
+      }
+    },
+    {
+      "name": "Aggregate Filter And Sort After 2000",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/books/aggregate1"
+      }
+    },
+    {
+      "name": "Aggregate Project Title Author Year",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/books/aggregate2"
+      }
+    },
+    {
+      "name": "Aggregate Unwind Genres",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/books/aggregate3"
+      }
+    },
+    {
+      "name": "Aggregate Join Books With Logs",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/books/aggregate4"
+      }
+    }
+  ]
+}
